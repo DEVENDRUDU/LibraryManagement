@@ -7,19 +7,23 @@
 <title>Logout</title>
 </head>
 <body>
-	 <% session.setAttribute("msg"," "); %>
+	 <% session.setAttribute("msg"," ");%>
 	 <% String value=String.valueOf(session.getAttribute("value")); %>	
 	 
 	 <% if(value=="librarian") { %> 
-	<jsp:forward page="librarianlogin.jsp"></jsp:forward>
-	<% } %>
+			 <% session.invalidate();
+			session=request.getSession();
+			session.setAttribute("msg"," ");
+			response.sendRedirect("librarianlogin.jsp");
+		 } %>
 	
 	<% if(value=="admin") { %> 
-	<jsp:forward page="adminlogin.jsp"></jsp:forward>
+		<jsp:forward page="adminlogin.jsp" />
+	<% } %>
+		
+	<% if(value=="student") { %> 
+	<jsp:forward page="studentlogin.jsp" />
 	<% } %>
 	
-	<% if(value=="student") { %> 
-	<jsp:forward page="studentlogin.jsp"></jsp:forward>
-	<% } %>
 </body>
 </html>
